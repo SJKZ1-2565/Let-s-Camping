@@ -39,7 +39,7 @@ public class ModelDatagen extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockModelGenerators) {
         createCookingPot(blockModelGenerators, LCBlocks.COOKING_POT);
-
+        blockModelGenerators.createGenericCube(LCBlocks.GROUD_MAT);
     }
 
     @Override
