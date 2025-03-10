@@ -1,6 +1,5 @@
 package com.sjkz1.lets_camping.block;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sjkz1.lets_camping.block.entity.CookingPotBlockEntity;
@@ -28,16 +27,13 @@ public class CookingPotBlock extends BaseEntityBlock {
 
     public static final MapCodec<CookingPotBlock> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
-                            Codec.BOOL.fieldOf("has_campfire").forGetter(cookingPotBlock -> cookingPotBlock.hasCampfire),
                             propertiesCodec()
                     )
                     .apply(instance, CookingPotBlock::new)
     );
-    private final boolean hasCampfire;
 
-    public CookingPotBlock(boolean hasCampfire, Properties properties) {
+    public CookingPotBlock(Properties properties) {
         super(properties);
-        this.hasCampfire = hasCampfire;
         this.registerDefaultState(
                 this.stateDefinition
                         .any()
