@@ -28,6 +28,14 @@ public class ModelDatagen extends FabricModelProvider {
         super(output);
     }
 
+    private static ModelTemplate create(String string, TextureSlot... textureSlots) {
+        return new ModelTemplate(Optional.of(ResourceLocation.tryBuild(LetsCamping.MOD_ID, "block/" + string)), Optional.empty(), textureSlots);
+    }
+
+    public static TextureMapping cooking(Block block) {
+        return new TextureMapping().put(TextureSlot.LIT_LOG, TextureMapping.getBlockTexture(Blocks.CAMPFIRE, "_log_lit")).put(TextureSlot.FIRE, TextureMapping.getBlockTexture(Blocks.CAMPFIRE, "_fire")).put(STICK, TextureMapping.getBlockTexture(Blocks.OAK_LOG, "")).put(POT, TextureMapping.getBlockTexture(Blocks.CAULDRON, "_side"));
+    }
+
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockModelGenerators) {
         createCookingPot(blockModelGenerators, LCBlocks.COOKING_POT);
@@ -49,14 +57,5 @@ public class ModelDatagen extends FabricModelProvider {
                         MultiVariantGenerator.multiVariant(block).with(BlockModelGenerators.createBooleanModelDispatch(BlockStateProperties.LIT, resourceLocation2, resourceLocation))
                                 .with(BlockModelGenerators.createHorizontalFacingDispatchAlt())
                 );
-    }
-
-
-    private static ModelTemplate create(String string, TextureSlot... textureSlots) {
-        return new ModelTemplate(Optional.of(ResourceLocation.tryBuild(LetsCamping.MOD_ID, "block/" + string)), Optional.empty(), textureSlots);
-    }
-
-    public static TextureMapping cooking(Block block) {
-        return new TextureMapping().put(TextureSlot.LIT_LOG, TextureMapping.getBlockTexture(Blocks.CAMPFIRE, "_log_lit")).put(TextureSlot.FIRE, TextureMapping.getBlockTexture(Blocks.CAMPFIRE, "_fire")).put(STICK, TextureMapping.getBlockTexture(Blocks.OAK_LOG, "")).put(POT, TextureMapping.getBlockTexture(Blocks.CAULDRON, "_side"));
     }
 }

@@ -12,10 +12,11 @@ public class LCBlockEntityTypes {
         return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(LetsCamping.MOD_ID, path), blockEntityType);
     }
 
-    public static final BlockEntityType<CookingPotBlockEntity> COOKING_POT = register(
+    public static void init() {
+    }    public static final BlockEntityType<CookingPotBlockEntity> COOKING_POT = register(
             "cooking_pot",
             BlockEntityType.Builder.of(CookingPotBlockEntity::new, LCBlocks.COOKING_POT).build()
     );
-    public static void init() {
-    }
+
+
 }

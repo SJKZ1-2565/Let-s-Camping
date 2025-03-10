@@ -11,8 +11,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-import java.util.function.ToIntFunction;
-
 public class LCBlocks {
 
     public static final Block COOKING_POT = new CookingPotBlock(false, BlockBehaviour.Properties.of().lightLevel(Blocks.litBlockEmission(15)).noOcclusion());
