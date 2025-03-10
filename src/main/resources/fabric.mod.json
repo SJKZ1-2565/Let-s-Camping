@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "lets_camping",
+  "version": "${version}",
+  "name": "Let's Camping",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": [
+    "Me!"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/lets_camping/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.sjkz1.lets_camping.LetsCamping"
+    ],
+    "client": [
+      "com.sjkz1.lets_camping.LetsCampingClient"
+    ],
+    "fabric-datagen": [
+      "com.sjkz1.lets_camping.datagen.LCDatagen"
+    ]
+  },
+  "mixins": [
+    "lets_camping.mixins.json",
+    {
+      "config": "lets_camping.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.10",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

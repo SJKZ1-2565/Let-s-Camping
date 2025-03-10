@@ -1,0 +1,9 @@
+{
+  "parent": "lets_camping:block/template_cooking_pot",
+  "textures": {
+    "fire": "minecraft:block/campfire_fire",
+    "lit_log": "minecraft:block/campfire_log_lit",
+    "pot": "minecraft:block/cauldron_side",
+    "stick": "minecraft:block/oak_log"
+  }
+}

@@ -1,0 +1,119 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"texture_size": [32, 32],
+	"textures": {
+		"particle": "block/campfire_log"
+	},
+	"elements": [
+		{
+			"from": [21, -1, 8],
+			"to": [23, 31, 10],
+			"rotation": {"angle": 22.5, "axis": "z", "origin": [21, -1, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 1, 8], "texture": "#stick"},
+				"east": {"uv": [0, 0, 1, 8], "texture": "#stick"},
+				"south": {"uv": [0, 0, 1, 8], "texture": "#stick"},
+				"west": {"uv": [0, 0, 1, 8], "texture": "#stick"},
+				"up": {"uv": [2, 0, 3, 1], "texture": "#stick"},
+				"down": {"uv": [0, 0, 1, 1], "texture": "#stick"}
+			}
+		},
+		{
+			"from": [-7, 0, 8],
+			"to": [-5, 32, 10],
+			"rotation": {"angle": -22.5, "axis": "z", "origin": [-7, 0, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 1, 8], "texture": "#stick"},
+				"east": {"uv": [0, 0, 1, 8], "texture": "#stick"},
+				"south": {"uv": [0, 0, 1, 8], "texture": "#stick"},
+				"west": {"uv": [0, 0, 1, 8], "texture": "#stick"},
+				"up": {"uv": [2, 0, 3, 1], "texture": "#stick"},
+				"down": {"uv": [0, 0, 1, 1], "texture": "#stick"}
+			}
+		},
+		{
+			"from": [7, 0, -5],
+			"to": [9, 32, -3],
+			"rotation": {"angle": 22.5, "axis": "x", "origin": [7, 0, -5]},
+			"faces": {
+				"north": {"uv": [0, 0, 1, 8], "texture": "#stick"},
+				"east": {"uv": [0, 0, 1, 8], "texture": "#stick"},
+				"south": {"uv": [0, 0, 1, 8], "texture": "#stick"},
+				"west": {"uv": [0, 0, 1, 8], "texture": "#stick"},
+				"up": {"uv": [2, 0, 3, 1], "texture": "#stick"},
+				"down": {"uv": [0, 0, 1, 1], "texture": "#stick"}
+			}
+		},
+		{
+			"from": [5, 13, 6],
+			"to": [12, 15, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [5, 13, 6]},
+			"faces": {
+				"north": {"uv": [0, 0, 3.5, 1], "texture": "#pot"},
+				"east": {"uv": [0, 0, 3.5, 1], "texture": "#pot"},
+				"south": {"uv": [0, 0, 3.5, 1], "texture": "#pot"},
+				"west": {"uv": [0, 0, 3.5, 1], "texture": "#pot"},
+				"up": {"uv": [0, 0, 3.5, 3.5], "texture": "#pot"},
+				"down": {"uv": [0, 0, 3.5, 3.5], "texture": "#pot"}
+			}
+		},
+		{
+			"from": [5, 15, 6],
+			"to": [6, 20, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [5, 15, 6]},
+			"faces": {
+				"north": {"uv": [0, 0, 0.5, 2.5], "texture": "#pot"},
+				"east": {"uv": [0, 0, 3.5, 2.5], "texture": "#pot"},
+				"south": {"uv": [0, 0, 0.5, 2.5], "texture": "#pot"},
+				"west": {"uv": [0, 0, 3.5, 2.5], "texture": "#pot"},
+				"up": {"uv": [0, 0, 0.5, 3.5], "texture": "#pot"},
+				"down": {"uv": [0, 0, 0.5, 3.5], "texture": "#pot"}
+			}
+		},
+		{
+			"from": [11, 15, 6],
+			"to": [12, 20, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [11, 15, 6]},
+			"faces": {
+				"north": {"uv": [0, 0, 0.5, 2.5], "texture": "#pot"},
+				"east": {"uv": [0, 0, 3.5, 2.5], "texture": "#pot"},
+				"south": {"uv": [0, 0, 0.5, 2.5], "texture": "#pot"},
+				"west": {"uv": [0, 0, 3.5, 2.5], "texture": "#pot"},
+				"up": {"uv": [0, 0, 0.5, 3.5], "texture": "#pot"},
+				"down": {"uv": [0, 0, 0.5, 3.5], "texture": "#pot"}
+			}
+		},
+		{
+			"from": [6, 15, 12],
+			"to": [11, 20, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 15, 12]},
+			"faces": {
+				"north": {"uv": [0, 0, 2.5, 2.5], "texture": "#pot"},
+				"east": {"uv": [0, 0, 0.5, 2.5], "texture": "#pot"},
+				"south": {"uv": [0, 0, 2.5, 2.5], "texture": "#pot"},
+				"west": {"uv": [0, 0, 0.5, 2.5], "texture": "#pot"},
+				"up": {"uv": [0, 0, 2.5, 0.5], "texture": "#pot"},
+				"down": {"uv": [0, 0, 2.5, 0.5], "texture": "#pot"}
+			}
+		},
+		{
+			"from": [6, 15, 6],
+			"to": [11, 20, 7],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 15, 6]},
+			"faces": {
+				"north": {"uv": [0, 0, 2.5, 2.5], "texture": "#pot"},
+				"east": {"uv": [0, 0, 0.5, 2.5], "texture": "#pot"},
+				"south": {"uv": [0, 0, 2.5, 2.5], "texture": "#pot"},
+				"west": {"uv": [0, 0, 0.5, 2.5], "texture": "#pot"},
+				"up": {"uv": [0, 0, 2.5, 0.5], "texture": "#pot"},
+				"down": {"uv": [0, 0, 2.5, 0.5], "texture": "#pot"}
+			}
+		}
+	],
+	"display": {
+		"head": {
+			"translation": [0, 10.5, 0]
+		}
+	}
+}
