@@ -59,7 +59,7 @@ public class CookingPotBlock extends BaseEntityBlock {
         BlockPos blockPos = blockPlaceContext.getClickedPos();
         boolean bl = levelAccessor.getFluidState(blockPos).getType() == Fluids.WATER;
         return this.defaultBlockState()
-                .setValue(LIT, Boolean.valueOf(!bl))
+                .setValue(LIT, !bl)
                 .setValue(FACING, blockPlaceContext.getHorizontalDirection().getOpposite());
     }
 
