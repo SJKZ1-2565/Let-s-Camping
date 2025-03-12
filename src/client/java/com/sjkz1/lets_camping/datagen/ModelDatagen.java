@@ -21,8 +21,10 @@ public class ModelDatagen extends FabricModelProvider {
 
     public static final TextureSlot STICK = TextureSlot.create("stick");
     public static final TextureSlot POT = TextureSlot.create("pot");
+    public static final TextureSlot GROUD_MAT = TextureSlot.create("groud_mat");
 
     public static final ModelTemplate COOKING_POT = create("template_cooking_pot", TextureSlot.FIRE, TextureSlot.LIT_LOG, STICK, POT);
+    public static final ModelTemplate MAT = create("template_mat", GROUD_MAT);
 
     public ModelDatagen(FabricDataOutput output) {
         super(output);
@@ -36,10 +38,14 @@ public class ModelDatagen extends FabricModelProvider {
         return new TextureMapping().put(TextureSlot.LIT_LOG, TextureMapping.getBlockTexture(Blocks.CAMPFIRE, "_log_lit")).put(TextureSlot.FIRE, TextureMapping.getBlockTexture(Blocks.CAMPFIRE, "_fire")).put(STICK, TextureMapping.getBlockTexture(Blocks.OAK_LOG, "")).put(POT, TextureMapping.getBlockTexture(Blocks.CAULDRON, "_side"));
     }
 
+    public static TextureMapping mat(Block block) {
+        return new TextureMapping().put(GROUD_MAT, TextureMapping.getBlockTexture(block, ""));
+    }
+
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockModelGenerators) {
         createCookingPot(blockModelGenerators, LCBlocks.COOKING_POT);
-        blockModelGenerators.createGenericCube(LCBlocks.GROUD_MAT);
+        createMat(blockModelGenerators, LCBlocks.WHITE_GROUD_MAT);
     }
 
     @Override
@@ -51,11 +57,15 @@ public class ModelDatagen extends FabricModelProvider {
     public final void createCookingPot(BlockModelGenerators blockModelGenerators, Block block) {
         ResourceLocation resourceLocation = ModelLocationUtils.getModelLocation(LCBlocks.COOKING_POT, "_campfire_off");
         ResourceLocation resourceLocation2 = COOKING_POT.create(block, cooking(block), blockModelGenerators.modelOutput);
-        blockModelGenerators.createSimpleFlatItemModel(block.asItem());
         blockModelGenerators.blockStateOutput
                 .accept(
                         MultiVariantGenerator.multiVariant(block).with(BlockModelGenerators.createBooleanModelDispatch(BlockStateProperties.LIT, resourceLocation2, resourceLocation))
                                 .with(BlockModelGenerators.createHorizontalFacingDispatchAlt())
                 );
+    }
+
+    public final void createMat(BlockModelGenerators blockModelGenerators, Block block) {
+        ResourceLocation resourceLocation = MAT.create(block, mat(block), blockModelGenerators.modelOutput);
+        blockModelGenerators.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, resourceLocation));
     }
 }

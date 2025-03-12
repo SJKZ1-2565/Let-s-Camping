@@ -15,11 +15,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 public class LCBlocks {
 
     public static final Block COOKING_POT = new CookingPotBlock( BlockBehaviour.Properties.of().lightLevel(Blocks.litBlockEmission(15)).noOcclusion());
-    public static final Block GROUD_MAT = new MatBlock( BlockBehaviour.Properties.of());
+    public static final Block WHITE_GROUD_MAT = new MatBlock( BlockBehaviour.Properties.of());
 
     public static void init() {
         register(COOKING_POT, "cooking_pot", true);
-        register(GROUD_MAT, "groud_mat", true);
+        register(WHITE_GROUD_MAT, "white_groud_mat", true);
     }
 
     private static void register(Block block, String id, boolean item) {
