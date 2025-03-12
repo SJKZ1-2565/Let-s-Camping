@@ -1,0 +1,6 @@
+{
+  "parent": "lets_camping:block/template_mat",
+  "textures": {
+    "groud_mat": "lets_camping:block/purple_groud_mat"
+  }
+}

@@ -45,7 +45,8 @@ public class ModelDatagen extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockModelGenerators) {
         createCookingPot(blockModelGenerators, LCBlocks.COOKING_POT);
-        createMat(blockModelGenerators, LCBlocks.WHITE_GROUD_MAT);
+        createMat(blockModelGenerators, LCBlocks.WHITE_GROUD_MAT, LCBlocks.ORANGE_GROUD_MAT, LCBlocks.MAGENTA_GROUD_MAT, LCBlocks.LIGHT_BLUE_GROUD_MAT, LCBlocks.YELLOW_GROUD_MAT, LCBlocks.LIME_GROUD_MAT, LCBlocks.PINK_GROUD_MAT, LCBlocks.GRAY_GROUD_MAT, LCBlocks.LIGHT_GRAY_GROUD_MAT, LCBlocks.CYAN_GROUD_MAT, LCBlocks.PURPLE_GROUD_MAT, LCBlocks.BLUE_GROUD_MAT, LCBlocks.BROWN_GROUD_MAT, LCBlocks
+                .GREEN_GROUD_MAT, LCBlocks.RED_GROUD_MAT, LCBlocks.BLACK_GROUD_MAT);
     }
 
     @Override
@@ -64,8 +65,10 @@ public class ModelDatagen extends FabricModelProvider {
                 );
     }
 
-    public final void createMat(BlockModelGenerators blockModelGenerators, Block block) {
-        ResourceLocation resourceLocation = MAT.create(block, mat(block), blockModelGenerators.modelOutput);
-        blockModelGenerators.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, resourceLocation));
+    public final void createMat(BlockModelGenerators blockModelGenerators, Block... blocks) {
+        for (Block block : blocks) {
+            ResourceLocation resourceLocation = MAT.create(block, mat(block), blockModelGenerators.modelOutput);
+            blockModelGenerators.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, resourceLocation));
+        }
     }
 }
