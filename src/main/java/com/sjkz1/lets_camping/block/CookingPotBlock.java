@@ -14,8 +14,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
@@ -28,8 +28,9 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,6 +41,8 @@ public class CookingPotBlock extends BaseEntityBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final IntegerProperty LEVEL = BlockStateProperties.LEVEL_CAULDRON;
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 14.0, 5.0, 14.0);
+    protected static final VoxelShape VISAUL_SHAPE = Block.box(0.0, 0.0, 0.0, 14.0, 16, 14.0);
 
     public static final MapCodec<CookingPotBlock> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
@@ -53,7 +56,7 @@ public class CookingPotBlock extends BaseEntityBlock {
         this.registerDefaultState(
                 this.stateDefinition
                         .any()
-                        .setValue(LIT, Boolean.valueOf(true))
+                        .setValue(LIT, Boolean.valueOf(false))
                         .setValue(FACING, Direction.NORTH)
         );
     }
@@ -90,11 +93,8 @@ public class CookingPotBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
-        LevelAccessor levelAccessor = blockPlaceContext.getLevel();
-        BlockPos blockPos = blockPlaceContext.getClickedPos();
-        boolean bl = levelAccessor.getFluidState(blockPos).getType() == Fluids.WATER;
         return this.defaultBlockState()
-                .setValue(LIT, !bl)
+                .setValue(LIT, false)
                 .setValue(FACING, blockPlaceContext.getHorizontalDirection().getOpposite());
     }
 
@@ -108,6 +108,16 @@ public class CookingPotBlock extends BaseEntityBlock {
                     ? createTickerHelper(blockEntityType, LCBlockEntityTypes.COOKING_POT, CookingPotBlockEntity::cookTick)
                     : createTickerHelper(blockEntityType, LCBlockEntityTypes.COOKING_POT, CookingPotBlockEntity::cooldownTick);
         }
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+        return SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getVisualShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+        return VISAUL_SHAPE;
     }
 
     @Override
