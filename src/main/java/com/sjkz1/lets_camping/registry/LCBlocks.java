@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class LCBlocks {
 
-    public static final Block COOKING_POT = new CookingPotBlock( BlockBehaviour.Properties.of().lightLevel(Blocks.litBlockEmission(15)).noOcclusion());
+    public static final Block COOKING_POT = new CookingPotBlock(BlockBehaviour.Properties.of().lightLevel(Blocks.litBlockEmission(15)).noOcclusion());
     public static final Block WHITE_GROUD_MAT = new MatBlock(BlockBehaviour.Properties.of());
     public static final Block ORANGE_GROUD_MAT = new MatBlock(BlockBehaviour.Properties.of());
     public static final Block MAGENTA_GROUD_MAT = new MatBlock(BlockBehaviour.Properties.of());

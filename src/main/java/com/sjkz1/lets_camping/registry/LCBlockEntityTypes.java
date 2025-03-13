@@ -13,7 +13,9 @@ public class LCBlockEntityTypes {
     }
 
     public static void init() {
-    }    public static final BlockEntityType<CookingPotBlockEntity> COOKING_POT = register(
+    }
+
+    public static final BlockEntityType<CookingPotBlockEntity> COOKING_POT = register(
             "cooking_pot",
             BlockEntityType.Builder.of(CookingPotBlockEntity::new, LCBlocks.COOKING_POT).build()
     );
