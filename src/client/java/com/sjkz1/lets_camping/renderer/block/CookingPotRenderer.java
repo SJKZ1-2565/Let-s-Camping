@@ -20,28 +20,6 @@ public class CookingPotRenderer implements BlockEntityRenderer<CookingPotBlockEn
 
     }
 
-//    @Override
-//    public void render(GemEmpoweringStationBlockEntity entity, float tickDelta, MatrixStack matrices,
-//                       VertexConsumerProvider vertexConsumers, int light, int overlay) {
-//        ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
-//        ItemStack itemStack = entity.getRenderStack();
-//        matrices.push();
-//        matrices.translate(0.5f, 0.75f, 0.5f);
-//        matrices.scale(0.35f, 0.35f, 0.35f);
-//        matrices.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees(entity.getCachedState().get(GemEmpoweringStationBlock.FACING).asRotation()));
-//        matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(270));
-//
-//        itemRenderer.renderItem(itemStack, ModelTransformationMode.GUI, getLightLevel(entity.getWorld(),
-//                entity.getPos()), OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, entity.getWorld(), 1);
-//        matrices.pop();
-//    }
-//
-//    private int getLightLevel(World world, BlockPos pos) {
-//        int bLight = world.getLightLevel(LightType.BLOCK, pos);
-//        int sLight = world.getLightLevel(LightType.SKY, pos);
-//        return LightmapTextureManager.pack(bLight, sLight);
-//    }
-
     @Override
     public void render(CookingPotBlockEntity blockEntity, float f, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j) {
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
@@ -50,7 +28,6 @@ public class CookingPotRenderer implements BlockEntityRenderer<CookingPotBlockEn
             poseStack.pushPose();
             poseStack.translate(0.5f, 1.0f, 0.6f);
             poseStack.scale(0.45f, 0.45f, 0.45f);
-//            poseStack.mulPose(Axis.YN.rotationDegrees(blockEntity.getBlockState().get.get(GemEmpoweringStationBlock.FACING).asRotation()));
             poseStack.mulPose(Axis.XP.rotationDegrees(270F));
             itemRenderer.renderStatic(new ItemStack(Items.SWEET_BERRIES), ItemDisplayContext.GUI, i, OverlayTexture.NO_OVERLAY, poseStack, multiBufferSource, blockEntity.getLevel(), 1);
             poseStack.popPose();
