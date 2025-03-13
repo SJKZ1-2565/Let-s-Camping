@@ -1,0 +1,2 @@
+accessWidener v2 named
+accessible method net/minecraft/data/models/BlockModelGenerators$BlockFamilyProvider getOrCreateModel (Lnet/minecraft/data/models/model/ModelTemplate;Lnet/minecraft/world/level/block/Block;)Lnet/minecraft/resources/ResourceLocation;

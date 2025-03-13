@@ -1,7 +1,7 @@
 {
   "variants": {
     "type=full": {
-      "model": "lets_camping:block/red_groud_mat"
+      "model": "lets_camping:block/groud_mat"
     },
     "type=slab": {
       "model": "lets_camping:block/groud_mat_slab"

@@ -1,7 +1,13 @@
 {
   "variants": {
-    "": {
+    "type=full": {
       "model": "lets_camping:block/black_groud_mat"
+    },
+    "type=slab": {
+      "model": "lets_camping:block/groud_mat_slab"
+    },
+    "type=stair": {
+      "model": "lets_camping:block/groud_mat_stair"
     }
   }
 }

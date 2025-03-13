@@ -13,6 +13,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -21,11 +23,12 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.List;
 
 public class MatBlock extends Block {
+    public static final EnumProperty<MatType> TYPE = EnumProperty.create("type", MatType.class);
+    protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 1.0, 16.0);
+
     public MatBlock(Properties properties) {
         super(properties);
     }
-
-    protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 1.0, 16.0);
 
     @Override
     protected VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
@@ -52,5 +55,10 @@ public class MatBlock extends Block {
     @Override
     protected SoundType getSoundType(BlockState blockState) {
         return SoundType.WOOL;
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(TYPE);
     }
 }

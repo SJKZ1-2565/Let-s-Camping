@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import org.jetbrains.annotations.NotNull;
 
 public class CookingPotRenderer implements BlockEntityRenderer<CookingPotBlockEntity> {
 
@@ -21,7 +22,7 @@ public class CookingPotRenderer implements BlockEntityRenderer<CookingPotBlockEn
     }
 
     @Override
-    public void render(CookingPotBlockEntity blockEntity, float f, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j) {
+    public void render(@NotNull CookingPotBlockEntity blockEntity, float f, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j) {
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
         for (ItemStack itemStack : blockEntity.getItems()) {
             LetsCamping.LOGGER.info(itemStack.getDisplayName().getString());

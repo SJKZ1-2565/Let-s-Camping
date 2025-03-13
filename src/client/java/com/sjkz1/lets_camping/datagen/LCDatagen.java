@@ -11,5 +11,6 @@ public class LCDatagen implements DataGeneratorEntrypoint {
         pack.addProvider(LangDatagen::new);
         pack.addProvider(LangDatagen.ThaiLangDataGen::new);
         pack.addProvider(ModelDatagen::new);
+        pack.addProvider(RecipeDatagen::new);
     }
 }
