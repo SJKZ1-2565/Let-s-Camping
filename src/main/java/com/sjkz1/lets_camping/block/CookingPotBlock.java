@@ -41,15 +41,14 @@ public class CookingPotBlock extends BaseEntityBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final IntegerProperty LEVEL = BlockStateProperties.LEVEL_CAULDRON;
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 14.0, 5.0, 14.0);
-    protected static final VoxelShape VISAUL_SHAPE = Block.box(0.0, 0.0, 0.0, 14.0, 16, 14.0);
-
     public static final MapCodec<CookingPotBlock> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
                             propertiesCodec()
                     )
                     .apply(instance, CookingPotBlock::new)
     );
+    protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 14.0, 5.0, 14.0);
+    protected static final VoxelShape VISAUL_SHAPE = Block.box(0.0, 0.0, 0.0, 14.0, 16, 14.0);
 
     public CookingPotBlock(Properties properties) {
         super(properties);
@@ -59,6 +58,11 @@ public class CookingPotBlock extends BaseEntityBlock {
                         .setValue(LIT, Boolean.valueOf(false))
                         .setValue(FACING, Direction.NORTH)
         );
+    }
+
+    public static boolean canLight(BlockState blockState) {
+        return blockState.hasProperty(LIT)
+                && !(Boolean) blockState.getValue(LIT);
     }
 
     @Override

@@ -3,7 +3,8 @@
   "package": "com.sjkz1.lets_camping.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "block.CakeBlockMixin"
+    "block.CakeBlockMixin",
+    "block.FlintAndSteelItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1
