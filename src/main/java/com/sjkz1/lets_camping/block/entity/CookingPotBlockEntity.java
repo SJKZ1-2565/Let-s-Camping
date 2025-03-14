@@ -3,22 +3,33 @@ package com.sjkz1.lets_camping.block.entity;
 import com.sjkz1.lets_camping.item.crafting.CookingPotRecipe;
 import com.sjkz1.lets_camping.registry.LCBlockEntityTypes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.world.Containers;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.util.Mth;
+import net.minecraft.world.Clearable;
+import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.CampfireBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class CookingPotBlockEntity extends BlockEntity {
+public class CookingPotBlockEntity extends BlockEntity implements Clearable {
 
     private final NonNullList<ItemStack> items = NonNullList.withSize(3, ItemStack.EMPTY);
     private final RecipeManager.CachedCheck<SingleRecipeInput, CookingPotRecipe> quickCheck = RecipeManager.createCheck(CookingPotRecipe.Type.INSTANCE);
@@ -48,8 +59,7 @@ public class CookingPotBlockEntity extends BlockEntity {
                             .map(recipeHolder -> ((CookingPotRecipe) recipeHolder.value()).assemble(singleRecipeInput, level.registryAccess()))
                             .orElse(itemStack);
                     if (itemStack2.isItemEnabled(level.enabledFeatures())) {
-                        Containers.dropItemStack(level, blockPos.getX(), blockPos.getY(), blockPos.getZ(), itemStack2);
-                        cookingPotBlockEntity.items.set(i, ItemStack.EMPTY);
+                        cookingPotBlockEntity.items.set(i, itemStack2);
                         level.sendBlockUpdated(blockPos, blockState, blockState, 3);
                         level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(blockState));
                     }
@@ -63,6 +73,15 @@ public class CookingPotBlockEntity extends BlockEntity {
     }
 
     public static void cooldownTick(Level level, BlockPos blockPos, BlockState blockState, CookingPotBlockEntity cookingPotBlockEntity) {
+        boolean bl = false;
+        for (int i = 0; i < cookingPotBlockEntity.items.size(); ++i) {
+            if (cookingPotBlockEntity.cookingProgress[i] <= 0) continue;
+            bl = true;
+            cookingPotBlockEntity.cookingProgress[i] = Mth.clamp(cookingPotBlockEntity.cookingProgress[i] - 2, 0, cookingPotBlockEntity.cookingTime[i]);
+        }
+        if (bl) {
+            CampfireBlockEntity.setChanged(level, blockPos, blockState);
+        }
     }
 
     public Optional<RecipeHolder<CookingPotRecipe>> getCookableRecipe(ItemStack itemStack) {
@@ -85,13 +104,70 @@ public class CookingPotBlockEntity extends BlockEntity {
         return false;
     }
 
+    @Override
+    protected void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.loadAdditional(compoundTag, provider);
+        this.items.clear();
+        ContainerHelper.loadAllItems(compoundTag, this.items, provider);
+        if (compoundTag.contains("CookingTimes", 11)) {
+            int[] is = compoundTag.getIntArray("CookingTimes");
+            System.arraycopy(is, 0, this.cookingProgress, 0, Math.min(this.cookingTime.length, is.length));
+        }
+
+        if (compoundTag.contains("CookingTotalTimes", 11)) {
+            int[] is = compoundTag.getIntArray("CookingTotalTimes");
+            System.arraycopy(is, 0, this.cookingTime, 0, Math.min(this.cookingTime.length, is.length));
+        }
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.saveAdditional(compoundTag, provider);
+        ContainerHelper.saveAllItems(compoundTag, this.items, true, provider);
+        compoundTag.putIntArray("CookingTimes", this.cookingProgress);
+        compoundTag.putIntArray("CookingTotalTimes", this.cookingTime);
+    }
+
     public NonNullList<ItemStack> getItems() {
         return this.items;
     }
 
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+        CompoundTag compoundTag = new CompoundTag();
+        ContainerHelper.saveAllItems(compoundTag, this.items, true, provider);
+        return compoundTag;
+    }
 
     private void markUpdated() {
         this.setChanged();
         this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
+    }
+
+    @Override
+    protected void applyImplicitComponents(BlockEntity.DataComponentInput dataComponentInput) {
+        super.applyImplicitComponents(dataComponentInput);
+        dataComponentInput.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(this.getItems());
+    }
+
+    @Override
+    protected void collectImplicitComponents(DataComponentMap.Builder builder) {
+        super.collectImplicitComponents(builder);
+        builder.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(this.getItems()));
+    }
+
+    @Override
+    public void removeComponentsFromTag(CompoundTag compoundTag) {
+        compoundTag.remove("Items");
+    }
+
+    @Override
+    public void clearContent() {
+        this.items.clear();
+    }
+
+    @Override
+    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 }
