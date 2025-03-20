@@ -32,7 +32,7 @@ import java.util.Optional;
 public class CookingPotBlockEntity extends BlockEntity implements Clearable {
 
     private final NonNullList<ItemStack> items = NonNullList.withSize(3, ItemStack.EMPTY);
-    private final RecipeManager.CachedCheck<SingleRecipeInput, CookingPotRecipe> quickCheck = RecipeManager.createCheck(CookingPotRecipe.Type.INSTANCE);
+    public final RecipeManager.CachedCheck<SingleRecipeInput, CookingPotRecipe> quickCheck = RecipeManager.createCheck(CookingPotRecipe.Type.INSTANCE);
     private final int[] cookingProgress = new int[4];
     private final int[] cookingTime = new int[4];
 

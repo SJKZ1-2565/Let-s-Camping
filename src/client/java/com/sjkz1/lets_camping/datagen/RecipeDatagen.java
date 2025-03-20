@@ -24,7 +24,7 @@ public class RecipeDatagen extends FabricRecipeProvider {
     public static <T extends AbstractCookingRecipe> void cookPotRecipes(
             RecipeOutput recipeOutput, String string, RecipeSerializer<T> recipeSerializer, AbstractCookingRecipe.Factory<T> factory, int i
     ) {
-        simpleCookingPotRecipe(recipeOutput, string, recipeSerializer, factory, i, Items.SWEET_BERRIES, LCItems.BERRY_JAM, 0.35F);
+//        simpleCookingPotRecipe(recipeOutput, string, recipeSerializer, factory, i, Items.SWEET_BERRIES, LCItems.BERRY_JAM, 0.35F);
     }
 
     public static <T extends AbstractCookingRecipe> void simpleCookingPotRecipe(

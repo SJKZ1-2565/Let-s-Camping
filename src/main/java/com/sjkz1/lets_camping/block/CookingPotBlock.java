@@ -7,11 +7,13 @@ import com.sjkz1.lets_camping.item.crafting.CookingPotRecipe;
 import com.sjkz1.lets_camping.registry.LCBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.BlockGetter;
@@ -83,11 +85,20 @@ public class CookingPotBlock extends BaseEntityBlock {
             if (optional.isPresent()) {
                 if (!level.isClientSide
                         && cookingPotBlockEntity.placeFood(player, itemStack2, ((CookingPotRecipe) ((RecipeHolder) optional.get()).value()).getCookingTime())) {
-                    player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
                     return ItemInteractionResult.SUCCESS;
                 }
 
                 return ItemInteractionResult.CONSUME;
+            }
+            if (!level.isClientSide) {
+                if (itemStack2.is(PotionContents.createItemStack(Items.POTION, Potions.WATER).getItem())) {
+                    if (!player.hasInfiniteMaterials()) {
+                        player.setItemInHand(interactionHand, new ItemStack(Items.GLASS_BOTTLE));
+                    }
+//                blockState.setValue(LEVEL, blockState.cycle());
+                    blockState.cycle(LEVEL);
+                    return ItemInteractionResult.SUCCESS;
+                }
             }
         }
 
@@ -117,11 +128,6 @@ public class CookingPotBlock extends BaseEntityBlock {
     @Override
     protected VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         return SHAPE;
-    }
-
-    @Override
-    protected VoxelShape getVisualShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return VISAUL_SHAPE;
     }
 
     @Override

@@ -5,7 +5,9 @@ import com.sjkz1.lets_camping.block.CookingPotBlock;
 import com.sjkz1.lets_camping.block.MatBlock;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -31,6 +33,7 @@ public class LCBlocks {
     public static final Block GREEN_GROUD_MAT = new MatBlock(BlockBehaviour.Properties.of());
     public static final Block RED_GROUD_MAT = new MatBlock(BlockBehaviour.Properties.of());
     public static final Block BLACK_GROUD_MAT = new MatBlock(BlockBehaviour.Properties.of());
+    public static final TagKey<Block> MATS = TagKey.create(Registries.BLOCK, ResourceLocation.tryBuild(LetsCamping.MOD_ID, "mats"));
 
     public static void init() {
         register(COOKING_POT, "cooking_pot", true);
